@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>墨渊书院 · 影文悦界 | 夺妻为后 & 豪门婚约</title>
+    <!-- 使用 Google Fonts 提升字体美观度 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+
+        .app {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.02);
+        }
+
+        /* 顶部导航 */
+        .navbar {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid #eef2f8;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2c3e50, #a5552b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo i {
+            background: none;
+            color: #c96f3e;
+            margin-right: 6px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: default;
+        }
+        .nav-links a:hover {
+            color: #c96f3e;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            gap: 8px;
+        }
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 6px 0;
+            width: 180px;
+            outline: none;
+            font-size: 0.85rem;
+        }
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6f7e8f;
+        }
+        .user-icon {
+            background: #eef2ff;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+        }
+
+        /* hero区域带媒体标签 */
+        .hero {
+            background: linear-gradient(112deg, #fef9f0 0%, #f6f2eb 100%);
+            padding: 2rem 2rem;
+            border-bottom: 1px solid #f0e9e0;
+        }
+        .hero-badge {
+            background: #e07c3c20;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #b45f2b;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .media-tag {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .pill {
+            background: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* 主容器 */
+        .main-container {
+            padding: 2rem;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #c96f3e;
+            padding-left: 1rem;
+        }
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* 双栏布局：文字故事 + 视频专区 */
+        .story-video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 文字小说卡片专区 */
+        .novel-cards {
+            background: #fefcf9;
+            border-radius: 28px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .novel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .novel-item {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #f0eae2;
+        }
+        .novel-item:hover {
+            transform: translateX(5px);
+            border-color: #e2cfb5;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.1);
+        }
+        .novel-cover-icon {
+            width: 60px;
+            height: 70px;
+            background: #f3ede5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #a56534;
+        }
+        .novel-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .novel-meta {
+            font-size: 0.7rem;
+            color: #917c64;
+            margin-top: 5px;
+        }
+
+        /* 视频专区 */
+        .video-showcase {
+            background: #1a1e24;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+        }
+        .video-header {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.8rem 1.2rem;
+            color: white;
+            border-bottom: 1px solid #3a3f4b;
+        }
+        .video-player {
+            position: relative;
+            background: #000;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #mainVideo {
+            width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            background: #010101;
+            display: block;
+        }
+        .video-caption {
+            padding: 0.8rem 1.2rem;
+            background: #0f1117;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: #f7f3ed;
+            border-radius: 20px;
+            margin-top: 0rem;
+        }
+        .video-thumb {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.7rem;
+            background: white;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #efe3d4;
+        }
+        .video-thumb.active-video {
+            background: #eae0d3;
+            border-left: 5px solid #c96f3e;
+        }
+        .thumb-icon {
+            width: 44px;
+            height: 44px;
+            background: #2d2f36;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eab308;
+            font-size: 1.3rem;
+        }
+        .thumb-info strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        /* 阅读器模态框 (文字小说) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .reader-container {
+            background: #fef7e8;
+            width: 750px;
+            max-width: 90vw;
+            height: 80vh;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .reader-header {
+            padding: 1rem 1.5rem;
+            background: #fff2e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .reader-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            font-family: Georgia, serif;
+        }
+        .close-reader {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #ad8b67;
+        }
+
+        footer {
+            background: #f4f7fb;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            border-top: 1px solid #e6edf4;
+        }
+        @media (max-width: 900px) {
+            .story-video-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                padding: 0 1rem;
+            }
+        }
+        button {
+            cursor: pointer;
+        }
+        .more-link {
+            font-size: 0.8rem;
+            color: #b48c5c;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="logo"><i class="fas fa-book-open"></i> 墨渊书院 · 影文志</div>
+            <div class="nav-links">
+                <a href="#">首页</a>
+                <a href="#">影文集</a>
+                <div class="search-bar">
+                    <input type="text" id="globalSearch" placeholder="搜小说或视频...">
+                    <button id="globalSearchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-video"></i> 独家影文剧场</div>
+            <h1>文字触动灵魂 · 视频演绎故事</h1>
+            <div class="media-tag">
+                <span class="pill"><i class="fas fa-feather-alt"></i> 古言权谋《夺妻为后》</span>
+                <span class="pill"><i class="fas fa-film"></i> 热播短剧《豪门婚约》</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- 核心双区: 左侧文字小说《夺妻为后》 + 右侧视频专区《豪门婚约》 -->
+        <div class="story-video-grid">
+            <!-- 左侧文字小说区：夺妻为后 -->
+            <div class="novel-cards">
+                <div class="section-title">
+                    <h2><i class="fas fa-quote-left"></i> 独家文字 · 夺妻为后</h2>
+                    <span class="more-link">🔥 强取豪夺 · 虐恋巅峰</span>
+                </div>
+                <div class="novel-list" id="textNovelList">
+                    <!-- 动态渲染“夺妻为后” -->
+                </div>
+                <p style="font-size:0.7rem; color:#aa8b6e; margin-top:12px;"><i class="fas fa-book-reader"></i> 点击卡片，开启沉浸阅读</p>
+            </div>
+
+            <!-- 右侧视频专区：豪门婚约系列 -->
+            <div class="video-showcase">
+                <div class="video-header">
+                    <i class="fas fa-tv"></i> 热播短剧 · 豪门婚约
+                </div>
+                <div class="video-player">
+                    <video id="mainVideo" controls autoplay muted loop>
+                        <source src="" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                </div>
+                <div class="video-caption" id="videoCaption">
+                    豪门婚约 · 命运的契约
+                </div>
+                <div class="video-list" id="videoPlaylist">
+                    <!-- 视频列表动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 墨渊书院 · 影文交织 | 《夺妻为后》全文阅读 | 《豪门婚约》独家放送</p>
+    </footer>
+</div>
+
+<!-- 文字阅读模态框 -->
+<div id="readerModal" class="modal-overlay">
+    <div class="reader-container">
+        <div class="reader-header">
+            <h3 id="readerTitle">夺妻为后</h3>
+            <button class="close-reader" id="closeReaderBtn">&times;</button>
+        </div>
+        <div class="reader-content" id="readerContent">
+            <p>正在加载绝世经典...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ************ 小说数据：仅包含《夺妻为后》 ************
+    const novelsData = [
+        {
+            id: "dqwh_001",
+            title: "夺妻为后",
+            author: "月下惊鸿",
+            category: "古言",
+            words: "68万字",
+            status: "完结",
+            coverIcon: "fas fa-crown",   // 图标展示，后续可轻松换成图片
+            description: "江山为聘，天下为媒。他夺我入宫，却不知我身怀惊世秘密。爱恨纠葛，最终母仪天下。",
+            contentPreview: "漫天大雪中，铁骑踏入丞相府。他身穿玄甲，居高临下：“这一生，你注定是我的后。” 她冷笑，眼底藏着决绝..."
+        }
+    ];
+
+    // ************ 视频数据：《豪门婚约》系列视频 ************
+    // 注意：此处使用了可公开访问的示例视频流（flower.mp4 / earth.mp4）
+    // 【重要】您可将 src 替换为自己的《豪门婚约》视频直链或本地路径，例如 "videos/haomen_01.mp4"
+    const videoList = [
+        {
+            id: "video_hm1",
+            title: "豪门婚约 · 命运的契约",
+            desc: "第一集：订婚宴风云，命运齿轮转动",
+            src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+            thumbIcon: "fas fa-ring"
+        },
+        {
+            id: "video_hm2",
+            title: "豪门婚约 · 暗流涌动",
+            desc: "第二集：继承者之战，情感博弈",
+            src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/earth.mp4",
+            thumbIcon: "fas fa-gem"
+        }
+        // 您可以直接在这里继续增加视频，或替换链接为自己的《豪门婚约》剧集
+    ];
+
+    // 渲染左侧文字小说（夺妻为后）
+    function renderTextNovels() {
+        const container = document.getElementById('textNovelList');
+        if (!container) return;
+        container.innerHTML = novelsData.map(novel => `
+            <div class="novel-item" data-id="${novel.id}">
+                <div class="novel-cover-icon">
+                    <i class="${novel.coverIcon}"></i>
+                </div>
+                <div class="novel-info">
+                    <h3>${escapeHtml(novel.title)}</h3>
+                    <div class="novel-meta">${novel.author} · ${novel.words} · ${novel.status}</div>
+                    <div class="novel-meta" style="font-size:0.7rem;">⭐ 强取豪夺 · 宫廷权谋</div>
+                </div>
+            </div>
+        `).join('');
+        // 绑定打开阅读器事件
+        document.querySelectorAll('.novel-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const id = item.getAttribute('data-id');
+                const novel = novelsData.find(n => n.id === id);
+                if (novel) openNovelReader(novel);
+            });
+        });
+    }
+
+    // 打开小说阅读器 (夺妻为后内容)
+    function openNovelReader(novel) {
+        const modal = document.getElementById('readerModal');
+        const titleEl = document.getElementById('readerTitle');
+        const contentEl = document.getElementById('readerContent');
+        if (!modal) return;
+        titleEl.innerText = novel.title;
+        // 渲染精彩章节内容 (纯文字沉浸)
+        contentEl.innerHTML = `
+            <div style="margin-bottom:1rem; border-bottom:1px solid #e9dbc9; padding-bottom:6px;">
+                <span style="font-size:0.8rem; background:#e7d9cb; padding:2px 10px; border-radius:40px;">${novel.author} 力作</span>
+            </div>
+            <h3 style="color:#b45f2b; margin:0.5rem 0;">《${novel.title}》 第一章 · 宫变</h3>
+            <p>  ${novel.contentPreview}</p>
+            <p>  ${novel.description}</p>
+            <p>  他是权倾朝野的摄政王，步步为营，只为将她从废太子身边夺来。世人皆骂他为夺人妻不择手段，他却于金殿之上拥她入怀：“这江山，不及你眉间朱砂。”</p>
+            <p>  她本是丞相嫡女，待嫁东宫，大婚当日铁骑踏碎红妆。他亲手为她披上凤袍，低沉耳语：“从今日起，你是我的后。” 深宫十年，她藏起恨意与秘密，直到敌军兵临城下，她执剑登上城楼，回眸一笑：“你以为，我当真只是一个棋子？”</p>
+            <p>  满朝哗然，而他骑马立于千军万马前，眼中只有她：“即便你颠覆天下，我也甘之如饴。”</p>
+            <p style="margin-top:1rem;"><i class="fas fa-star" style="color:#eab308;"></i> 全书${novel.words} 巅峰权谋虐恋，已完结。百万读者含泪推荐，墨渊书院独家完整版。</p>
+            <p style="text-align:right; margin-top:1.2rem;">—— 精彩继续，请期待番外 ——</p>
+        `;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeReader() {
+        const modal = document.getElementById('readerModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
+    // 渲染视频列表 (豪门婚约)
+    function renderVideoPlaylist() {
+        const playlistDiv = document.getElementById('videoPlaylist');
+        const videoPlayer = document.getElementById('mainVideo');
+        if (!playlistDiv) return;
+        playlistDiv.innerHTML = videoList.map((video, idx) => `
+            <div class="video-thumb" data-video-id="${video.id}" data-src="${video.src}">
+                <div class="thumb-icon"><i class="${video.thumbIcon}"></i></div>
+                <div class="thumb-info">
+                    <strong>${escapeHtml(video.title)}</strong>
+                    <span style="font-size:0.7rem;">${escapeHtml(video.desc)}</span>
+                </div>
+            </div>
+        `).join('');
+
+        // 默认加载第一个视频
+        if (videoList.length > 0) {
+            const firstVideo = videoList[0];
+            videoPlayer.src = firstVideo.src;
+            document.getElementById('videoCaption').innerText = firstVideo.title + " · " + firstVideo.desc;
+            videoPlayer.load();
+            videoPlayer.play().catch(e => console.log("浏览器自动播放策略限制，用户可手动点击播放"));
+            // 高亮第一个视频项
+            const firstThumb = document.querySelector('.video-thumb');
+            if(firstThumb) firstThumb.classList.add('active-video');
+        }
+
+        // 绑定点击切换视频
+        document.querySelectorAll('.video-thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const src = thumb.getAttribute('data-src');
+                const titleText = thumb.querySelector('strong')?.innerText || '豪门婚约';
+                const descText = thumb.querySelector('span')?.innerText || '';
+                if (src) {
+                    videoPlayer.src = src;
+                    videoPlayer.load();
+                    videoPlayer.play().catch(e=>console.log);
+                    document.getElementById('videoCaption').innerText = titleText + " · " + descText;
+                }
+                // 更新高亮样式
+                document.querySelectorAll('.video-thumb').forEach(t => t.classList.remove('active-video'));
+                thumb.classList.add('active-video');
+            });
+        });
+    }
+
+    // 全局搜索功能 (同时搜索小说《夺妻为后》 与 视频《豪门婚约》系列)
+    function globalSearch(keyword) {
+        if (!keyword.trim()) {
+            alert("请输入关键词，例如：夺妻为后 或 豪门婚约");
+            return;
+        }
+        const kw = keyword.toLowerCase();
+        const matchedNovels = novelsData.filter(n => n.title.toLowerCase().includes(kw) || n.author.toLowerCase().includes(kw));
+        const matchedVideos = videoList.filter(v => v.title.toLowerCase().includes(kw) || v.desc.toLowerCase().includes(kw));
+        
+        if (matchedNovels.length === 0 && matchedVideos.length === 0) {
+            alert(`🔍 未找到关于“${keyword}”的内容。试试 “夺妻为后” 或 “豪门婚约”`);
+        } else {
+            let msg = `✨ 搜索结果：“${keyword}” ✨\n\n`;
+            if (matchedNovels.length) msg += `📖 文字小说：${matchedNovels.map(n=>n.title).join(', ')}\n`;
+            if (matchedVideos.length) msg += `🎬 视频内容：${matchedVideos.map(v=>v.title).join(', ')}\n`;
+            msg += `\n💡 提示：点击左侧小说卡片可阅读全文，右侧视频列表可观看短剧。`;
+            alert(msg);
+            // 如果有匹配视频，平滑滚动到视频区增强体验
+            if (matchedVideos.length) {
+                document.querySelector('.video-showcase').scrollIntoView({ behavior: 'smooth' });
+            } else if (matchedNovels.length) {
+                document.querySelector('.novel-cards').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
+    // 防XSS辅助
+    function escapeHtml(str) {
+        if(!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // 初始化所有
+    function init() {
+        renderTextNovels();       // 渲染夺妻为后
+        renderVideoPlaylist();    // 渲染豪门婚约视频列表及播放器
+        
+        // 搜索交互
+        const searchBtn = document.getElementById('globalSearchBtn');
+        const searchInput = document.getElementById('globalSearch');
+        if(searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                globalSearch(searchInput.value);
+            });
+        }
+        if(searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') globalSearch(searchInput.value);
+            });
+        }
+        
+        // 关闭阅读器模态框
+        const closeBtn = document.getElementById('closeReaderBtn');
+        if(closeBtn) closeBtn.addEventListener('click', closeReader);
+        const modalBg = document.getElementById('readerModal');
+        if(modalBg) {
+            modalBg.addEventListener('click', (e) => {
+                if(e.target === modalBg) closeReader();
+            });
+        }
+    }
+    init();
+</script>
+</body>
+</html>
